@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+<style>
+	body{
+		margin:0;
+		padding:0;
+	}
+	.img_wrap{
+		width: 120%;
+		overflow: hidden;
+	}
+	.img_crop{
+	    height: 25vh;
+	    width: 5vw;
+	    float: left;
+	    margin-left: -2.5vw;
+	    overflow: hidden;
+    	clip-path: polygon(0% 0, 100% 0%, 50% 100%);
+	    position: relative;
+	}
+	.img_wrap>.img_crop:nth-child(2n-1){
+		transform: scaleY(-1) scaleX(-1);
+	}
+	.img_pre_crop_wrap{
+		width: 100vw;
+		height: 100%;
+		transition: 0.3s
+	}
+	.img_pre_crop_wrap>div:nth-child(1){
+		z-index: 10
+	}
+	.img_pre_crop_wrap>div:nth-child(2){
+		z-index: 9
+	}
+	.img_pre_crop_wrap_1{
+		margin-left: 0
+	}
+.xans-product-action>.ec-base-button>a{
+    height: 3vh;
+    width: 100% !important;
+    padding: 0.5vh !important;
+    }
+	.img_pre_crop_wrap_2{
+		margin-left: -7.5vw
+	}
+	.img_pre_crop_wrap_3{
+		margin-left: -15vw
+	}
+	.img_pre_crop_wrap_4{
+		margin-left: -22.5vw
+	}
+	.img_pre_crop_wrap_5{
+		margin-left: -30vw
+	}
+	.img_pre_crop_wrap_6{
+		margin-left: -37.5vw
+	}
+	.img_pre_crop_wrap_7{
+		margin-left: -45vw
+	}
+	.img_pre_crop_wrap_8{
+		margin-left: -52.5vw
+	}
+
+	.img_pre_crop{
+		overflow: hidden;
+	    height: 33.33vh;
+	    width: 7.5vw;
+	    float: left;
+		position: relative;
+	}
+	img{
+		width: 300%;
+		margin-left: -100%;
+    	margin-top: -30%;
+    	transition: 0.5s
+	}
+	.hovered{
+    	margin-left: -120%;
+	}
+	.pre_hovered{
+    	margin-left: -70%;
+	}
+	.pre_pre_hovered{
+    	margin-left: -60%;
+	}
+	.notransition{
+		transition: 0s !important
+	}
+</style>
+<body>
+		<div class="img_crop unit">
+			<div class="img_pre_crop_wrap img_pre_crop_wrap_1">
+				<div class="img_pre_crop">
+					<img src="1/1.jpg">
+				</div>
+				<div class="img_pre_crop">
+					<img src="2/1.jpg">
+				</div>
+				<div class="img_pre_crop">
+					<img src="3/1.jpg">
+				</div>
+				<div class="img_pre_crop">
+					<img src="4/1.jpg">
+				</div>
+				<div class="img_pre_crop">
+					<img src="5/1.jpg">
+				</div>
+				<div class="img_pre_crop">
+					<img src="6/1.jpg">
+				</div>
+				<div class="img_pre_crop">
+					<img src="7/1.jpg">
+				</div>
+				<div class="img_pre_crop">
+					<img src="8/1.jpg">
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			init()
+			function init(){
+				yamount = 3
+				xamount = 40
+				for (var i = 1; i <= yamount; i++) {
+					$('body').append('<div class="img_wrap img_wrap'+i+'">')
+					for (var j = 1; j <= xamount; j++) {
+						$('.img_wrap'+i+'').append($('.unit').clone().addClass('img_crop_y_'+i+' img_crop_x_'+j).removeClass('unit'));
+					}
+				}
+				$('.unit').remove()
+			}
+
+			$('.img_crop').hover(function(){
+				var pos_y = $(this).attr('class').split(' ')[1].split('_')[3];
+				var pos_x = $(this).attr('class').split(' ')[2].split('_')[3];
+				$(this).find('img').addClass('hovered')
+				console.log('.img_crop_y_'+(pos_y)+'.img_crop_x_'+(pos_x+1))
+				console.log('.img_crop_y_'+(pos_y)+'.img_crop_x_'+(pos_x-1))
+				$('.img_crop_y_'+(pos_y)+'.img_crop_x_'+(parseInt(pos_x)-1)).find('img').addClass('pre_hovered')
+				$('.img_crop_y_'+(pos_y)+'.img_crop_x_'+(parseInt(pos_x)+1)).find('img').addClass('pre_hovered')
+				$('.img_crop_y_'+(pos_y)+'.img_crop_x_'+(parseInt(pos_x)-2)).find('img').addClass('pre_pre_hovered')
+				$('.img_crop_y_'+(pos_y)+'.img_crop_x_'+(parseInt(pos_x)+2)).find('img').addClass('pre_pre_hovered')
+			}, function(){
+				$(this).find('img').removeClass('hovered')
+				$('.pre_hovered').removeClass('pre_hovered')
+				$('.pre_pre_hovered').removeClass('pre_pre_hovered')
+			})
+			// initleft()
+			function initleft(){
+				for (var k = 30; k >= 1; k--) {
+				console.log($('.img_crop_x_'+k+'>.img_pre_crop_wrap'))
+					$('.img_crop_x_'+k+'>.img_pre_crop_wrap').addClass('img_pre_crop_wrap_'+(k%8+1))
+				}
+			}
+			var crop_counter = 0
+			changecloth()
+			function changecloth(counter){
+				$('.img_crop_x_'+counter+' .img_pre_crop_wrap_8').addClass('notransition')
+				$('.img_crop_x_'+counter+' .img_pre_crop_wrap_8').removeClass();
+				$('.img_crop_x_'+counter+' .img_pre_crop_wrap_8').addClass('img_pre_crop_wrap_8')
+				for (var i = 8; i >= 1; i--) {
+				}
+				for (var i = 7; i >= 1; i--) {
+					console.log(('.img_crop_x_'+counter+' .img_pre_crop_wrap_'+i))
+					console.log($('.img_crop_x_'+counter+' .img_pre_crop_wrap_'+i))
+					$('.img_crop_x_'+counter+' .img_pre_crop_wrap_'+i).addClass('img_pre_crop_wrap_'+(i+1))
+				}			
+				$('.notransition').removeClass('notransition')
+				setTimeout(function(){ 
+					crop_counter ++
+					changecloth(crop_counter%30); }, 100);
+			}
+		})
+	</script>
+</body>
+</head>

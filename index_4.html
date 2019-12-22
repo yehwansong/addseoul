@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+<style>
+	body{
+		margin:0;
+		padding:0;
+	}
+	.wrap{
+    	width: 1000vw;
+	}
+	.following_mouse_l_1,
+	.following_mouse_r_1,
+	.following_mouse_l_2,
+	.following_mouse_r_2{
+		position: absolute;
+	}
+	.following_mouse_l_1.following_ani{
+		transform: translateX(-70%);
+	}
+	.following_mouse_r_1.following_ani{
+		transform: translateX(70%);
+	}
+	.following_mouse_l_2.following_ani{
+		transform: translateX(-30%);
+	}
+	.following_mouse_r_2.following_ani{
+		transform: translateX(30%);
+		opacity: 1 !important
+	}
+	.trans_ani{
+		transition: 0.3s
+	}
+	.logo{
+		opacity: 0;
+		background: white
+	}
+</style>s
+<body>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			init()
+			function init(){
+				yamount = 20
+				xamount = 20
+				for (var i = 1; i <= yamount; i++) {
+					$('body').append('<div class="wrap wrap'+i+'" style = "height:'+100/yamount+'vh">')
+					$('.wrap'+i).css({'marginLeft' : (i%2)*50/yamount+'vh'})
+					for (var j = 1; j <= xamount; j++) {
+						$('.wrap'+i).append('<img class="logo logo_x_'+j+' logo_y_'+i+'" src="ADD_LOGO.svg" style = "height:'+100/yamount+'vh;">');
+					}
+						$('.wrap'+i).append('<img class="following_mouse_l_1" src="ADD_LOGO.svg" style = "height:'+100/yamount+'vh;">');
+						$('.wrap'+i).append('<img class="following_mouse_l_2" src="ADD_LOGO.svg" style = "height:'+100/yamount+'vh;">');
+						$('.wrap'+i).append('<img class="following_mouse_r_1" src="ADD_LOGO.svg" style = "height:'+100/yamount+'vh;">');
+						$('.wrap'+i).append('<img class="following_mouse_r_2" src="ADD_LOGO.svg" style = "height:'+100/yamount+'vh;">');
+				}
+				$('.unit').remove()
+			}
+			$('.logo').hover(function(){
+				console.log('heu')
+				$(this).css({'opacity':1})
+				$('.wrap'+$(this).attr('class').split('_y_')[1]+' .following_mouse_l_1').css({'left':$(this).offset().left})
+				$('.wrap'+$(this).attr('class').split('_y_')[1]+' .following_mouse_l_2').css({'left':$(this).offset().left})
+				$('.wrap'+$(this).attr('class').split('_y_')[1]+' .following_mouse_r_1').css({'left':$(this).offset().left})
+				$('.wrap'+$(this).attr('class').split('_y_')[1]+' .following_mouse_r_2').css({'left':$(this).offset().left})
+				$('.wrap'+$(this).attr('class').split('_y_')[1]+' .following_mouse_l_1').addClass('following_ani')
+				$('.wrap'+$(this).attr('class').split('_y_')[1]+' .following_mouse_l_1').addClass('trans_ani')
+				$('.wrap'+$(this).attr('class').split('_y_')[1]+' .following_mouse_l_2').addClass('following_ani')
+				$('.wrap'+$(this).attr('class').split('_y_')[1]+' .following_mouse_l_2').addClass('trans_ani')
+				$('.wrap'+$(this).attr('class').split('_y_')[1]+' .following_mouse_r_1').addClass('following_ani')
+				$('.wrap'+$(this).attr('class').split('_y_')[1]+' .following_mouse_r_1').addClass('trans_ani')
+				$('.wrap'+$(this).attr('class').split('_y_')[1]+' .following_mouse_r_2').addClass('following_ani')
+				$('.wrap'+$(this).attr('class').split('_y_')[1]+' .following_mouse_r_2').addClass('trans_ani')
+			},function(){
+				$('.wrap'+$(this).attr('class').split('_y_')[1]+' .following_mouse_l_1').removeClass('following_ani')
+				$('.wrap'+$(this).attr('class').split('_y_')[1]+' .following_mouse_l_2').removeClass('following_ani')
+				$('.wrap'+$(this).attr('class').split('_y_')[1]+' .following_mouse_r_1').removeClass('following_ani')
+				$('.wrap'+$(this).attr('class').split('_y_')[1]+' .following_mouse_r_2').removeClass('following_ani')
+			})
+		})
+	</script>
+</body>
+</head>
